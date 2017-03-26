@@ -1,0 +1,23 @@
+# vi: ts=2 expandtab
+---
+
+- name: mock is installed
+  package: name={{item}} state=present
+  with_items:
+    - mock-scm
+
+# needed by nosync
+- name: epel is installed
+  include_role: name=mafalb.epel
+  when: "{{mock_config.nosync}}"
+
+- name: nosync is installed
+  package: name=nosync state=present
+  when: "{{mock_config.nosync}}"
+
+- name: config file for site-defaults is present
+  template: src=site-defaults.cfg.j2 dest=/etc/mock/site-defaults.cfg
+
+- name: mock users are in the mock group
+  user: name={{item}} append=yes groups=mock
+  with_items: "{{mock_users}}"

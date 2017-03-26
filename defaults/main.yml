@@ -1,0 +1,7 @@
+# vi: ts=2 expandtab
+---
+
+mock_users: mock
+mock_config:
+  nosync: False
+  update_before_build: True
