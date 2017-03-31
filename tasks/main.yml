@@ -8,7 +8,7 @@
 
 # needed by nosync
 - name: epel is installed
-  include_role: name=mafalb.epel
+  include_role: name=mafalb.repo/epel
   when: "{{mock_config.nosync}}"
 
 - name: nosync is installed
